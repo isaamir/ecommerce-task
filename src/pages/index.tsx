@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
-import Footer from '../components/Footer'
+import Footer from '@/components/Footer'
+import Card from '@/components/Card'
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
@@ -10,6 +11,10 @@ const Home = () => {
     // </main>
     <div>
       <Footer />
+      <div className='wrapper'>
+      <Card />
+      </div>
+      
     </div>
   )
 }
