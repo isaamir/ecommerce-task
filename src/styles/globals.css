@@ -9,3 +9,12 @@
   max-width: 1200px;
   margin: 0 auto
 }
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
