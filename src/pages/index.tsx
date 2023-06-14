@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-
+import Footer from '../../components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
     // >
     // </main>
     <div>
-      This is the home page
+      <Footer />
     </div>
   )
 }
