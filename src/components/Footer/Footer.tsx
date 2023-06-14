@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./footer.module.css";
 import Link from "next/link";
 import Button from "../Button";
 import Input from "../Input";
+import Text from "../Text";
 import { GrFacebookOption } from "react-icons/gr";
 import { AiOutlineGooglePlus } from "react-icons/ai";
 import { RiTwitterFill } from "react-icons/ri";
@@ -11,9 +11,9 @@ import { TiSocialInstagram } from "react-icons/ti";
 
 const Footer = () => {
   return (
-    <div className={styles.bgImage}>
-      <div className="wrapper flex flex-col divide-y divide-dashed md:divide-solid">
-        <div className="flex flex-row justify-between pt-[76px] pb-[65px]">
+    <div className="bg-[url('/assets/images/background.png')] bg-no-repeat bg-cover" >
+      <div className="wrapper flex flex-col divide-y divide-dashed md:divide-solid md:max-xl:px-[50px]">
+        <div className="flex flex-row flex-wrap justify-between  pt-[76px] pb-[65px]">
           <div className="flex flex-col gap-[24px] max-w-[250px]">
             <Image
               src="/assets/images/logo.png"
@@ -22,30 +22,27 @@ const Footer = () => {
               height={27}
               className="object-contain"
             />
-            <p className="text-[14px] text-[#666]">
+            <Text>
               Get 10% discount with notified about the latest news and updates.
-            </p>
+            </Text>
           </div>
 
-          <div className="flex flex-col gap-[24px]">
-            <p className="text-[18px] text-[#444] font-medium">Newsletters</p>
+          <div className="flex flex-col gap-[24px] max-w-[280px]">
+            <Text size="lg">Newsletters</Text>
             <Input placeholder="Email Address"/>
           </div>
 
-          <div className="flex flex-col gap-[24px]">
-            <p className="text-[18px] text-[#444] font-medium">Contact Us</p>
-            <p className="text-[14px] text-[#666]">
+          <div className="flex flex-col gap-[24px] max-w-[200px]">
+            <Text size="lg">Contact Us</Text>
+            <Text>
               Your address or contact info goes here
-            </p>
+            </Text>
           </div>
 
           <div className="flex flex-col gap-[24px]">
-            <p className="text-[18px] text-[#444] font-medium">Follow Us</p>
-            {/* <p className="">
-              Get 10% discount with notified about the latest news and updates.
-            </p> */}
+            <Text size="lg">Follow Us</Text>
 
-            <div>
+            <div className="flex gap-2">
               <Button size="regular" variant="link">
                 <Link href="https://facebook.com">
                   <GrFacebookOption color="#c1c1c1" />
