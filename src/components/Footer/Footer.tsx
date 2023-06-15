@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <div className="bg-[url('/assets/images/background.png')] bg-no-repeat bg-cover" >
       <div className="wrapper flex flex-col divide-y divide-dashed md:divide-solid md:max-xl:px-[50px]">
-        <div className="flex flex-row flex-wrap justify-between  pt-[76px] pb-[65px]">
+        <div className="flex flex-row justify-between  pt-[76px] pb-[65px]">
           <div className="flex flex-col gap-[24px] max-w-[250px]">
             <Image
               src="/assets/images/logo.png"
