@@ -12,7 +12,7 @@ const TabsCustom:React.FC<ITabsProps> = ({ defaultTab, selectedTabValue, setSele
     value={selectedTabValue}
   >
     <Tabs.List 
-    className="flex justify-start height-[50px] p-[6px] w-[fit-content] shrink-0 focus:outline:'red' focus:ring-violet-300 "
+    className="flex justify-start height-[50px] p-[6px] w-[fit-content] shrink-0 focus:ring-violet-300 "
     >
 
     {tabsData && tabsData.map((tab, index) => (
@@ -22,7 +22,7 @@ const TabsCustom:React.FC<ITabsProps> = ({ defaultTab, selectedTabValue, setSele
             className={clsx(
               'px-8 pb-[17px] bg-transparent text-[20px] text-[#505050] ',
               variant === 'primary' && 'focus:border-b-2 focus:border-[#ff4136]',
-              variant === 'secondary' && 'focus:text-blue-500  bg-gray-200 text-gray-800',
+              variant === 'secondary' && 'focus:text-[#ff4136] hover:text-[#ff4136]',
               variant === 'success' && 'bg-green-500 text-white',
               variant === 'warning' && 'bg-yellow-500 text-white',
               variant === 'danger' && 'bg-red-500 text-white',
