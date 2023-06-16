@@ -32,7 +32,7 @@ const Card: React.FC<ICardProps> = ({ data }) => {
     >
       <div className="flex flex-col">
         <div className="w-[270px] h-[270px]">
-          <Link href="/product-detail">
+          <Link href="/">
             <div
               className="bg-no-repeat bg-[length:270px_270px] w-[270px] h-[270px] relative"
               style={{ backgroundImage: `url(${data.image})` }}

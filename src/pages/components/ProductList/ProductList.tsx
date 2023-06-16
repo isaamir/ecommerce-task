@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Card from "@/components/Card";
-import { produtList } from "./dummyData";
+import { produtList } from "@/utils/helpers/productListDummyData";
 import Tabs from "@/components/Tabs";
 import { TabValues } from "@/utils/enums";
 
@@ -9,7 +9,7 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <div className="flex justify-center flex-col my-[80px]">
+      <div className="flex justify-center flex-col mb-[80px]">
         <div className=" flex justify-center my-[20px]">
           <Tabs
             selectedTabValue={selectedTabValue}
