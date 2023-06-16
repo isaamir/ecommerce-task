@@ -8,3 +8,8 @@ export enum TabValues {
     SIX = '6',
     SEVEN = '7',
   }
+
+export enum CrousalVarients {
+  SINGLE = "SINGLE",
+  MULTIPLE = 'MULTIPLE'
+}
