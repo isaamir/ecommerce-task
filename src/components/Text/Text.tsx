@@ -7,7 +7,8 @@ const Text = ({ size = 'md', variant = 'gray', as = 'p', className, children }:a
   const sizes = {
     sm: 'text-[12px]',
     md: 'text-[14px] font-normal',
-    lg: 'text-[16px] font-medium'
+    lg: 'text-[16px] font-medium',
+    xl: 'text-[24px] text-[#505050]'
   } as any
 
   const variants = {
