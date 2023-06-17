@@ -29,7 +29,7 @@ const ProductList: React.FC = () => {
             <>
               {produtList &&
                 produtList.map((data, ind) => {
-                  return <Card key={ind} data={data} />;
+                  return <Card key={ind} data={data} animate />;
                 })}
             </>
           )}
@@ -37,7 +37,7 @@ const ProductList: React.FC = () => {
             <>
               {produtList &&
                 produtList.map((data, ind) => {
-                  return <Card key={ind} data={data} />;
+                  return <Card key={ind} data={data} animate />;
                 })}
             </>
           )}
@@ -45,7 +45,7 @@ const ProductList: React.FC = () => {
             <>
               {produtList &&
                 produtList.map((data, ind) => {
-                  return <Card key={ind} data={data} />;
+                  return <Card key={ind} data={data} animate />;
                 })}
             </>
           )}
@@ -53,7 +53,7 @@ const ProductList: React.FC = () => {
             <>
               {produtList &&
                 produtList.map((data, ind) => {
-                  return <Card key={ind} data={data} />;
+                  return <Card key={ind} data={data} animate />;
                 })}
             </>
           )}

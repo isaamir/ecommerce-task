@@ -6,4 +6,5 @@ type TProductData = {
 }
 export interface ICardProps{
     data : TProductData
+    animate?: boolean
 }

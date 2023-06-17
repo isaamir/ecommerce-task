@@ -7,7 +7,8 @@ const Text = ({ size = 'md', variant = 'gray', as = 'p', className, children }:a
   const sizes = {
     sm: 'text-[12px]',
     md: 'text-[14px] font-normal',
-    lg: 'text-[16px] font-medium'
+    lg: 'text-[16px] font-medium',
+    xl: 'text-[24px] text-[#505050]'
   } as any
 
   const variants = {
@@ -16,7 +17,7 @@ const Text = ({ size = 'md', variant = 'gray', as = 'p', className, children }:a
     contrast: 'text-[#666] hover:text-[#ff4136]',
     white: 'text-[#ffffff] font-normal',
     underline: 'text-[#ffffff] font-normal text-[16px] py-2 border-b-[1px] border-[#ffffff]-1',
-    dark: 'text-gray-900'
+    dark: 'text-[444] font-medium'
   } as any
 
   return (
