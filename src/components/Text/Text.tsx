@@ -17,7 +17,7 @@ const Text = ({ size = 'md', variant = 'gray', as = 'p', className, children }:a
     contrast: 'text-[#666] hover:text-[#ff4136]',
     white: 'text-[#ffffff] font-normal',
     underline: 'text-[#ffffff] font-normal text-[16px] py-2 border-b-[1px] border-[#ffffff]-1',
-    dark: 'text-gray-900'
+    dark: 'text-[444] font-medium'
   } as any
 
   return (

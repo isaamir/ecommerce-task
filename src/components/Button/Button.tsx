@@ -2,13 +2,14 @@
 import { type ButtonHTMLAttributes, type ReactNode } from "react"
 import clsx from "clsx"
 
-type buttonVariant = "regular" | "red" | "link" | "icon" | "light"
+type buttonVariant = "regular" | "red" | "link" | "icon" | "iconSlider" | "light"
 type buttonSize = "regular" | "large" | "small"
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: buttonSize
   variant?: buttonVariant
   children: ReactNode
+  className?: string
 }
 
 const Button = ({
@@ -33,8 +34,10 @@ const Button = ({
         variant === "light" &&
           "px-[8px] py-[20px] text-[#4B4B4B] font-normal border-solid border-[1px] border-[#D7DBDD] hover:bg-[#ff4136] hover:border-[#ff4136] hover:text-[#ffffff] disabled:hover:bg-brand",
         variant === "icon" && "px-[8px] py-[8px]",
-        variant === "link" && "rounded-[50%] px-[8px] py-[8px] border-solid border-[1px] border-[#c1c1c1] hover:bg-[#ff4136] hover:border-[#ff4136] disabled:no-underline"
-
+        variant === "iconSlider" && "px-[6px] py-[6px] bg-[#CACFD2] hover:bg-[#626567] rounded-[50%]",
+        
+        variant === "link" && "rounded-[50%] px-[8px] py-[8px] border-solid border-[1px] border-[#c1c1c1] hover:bg-[#ff4136] hover:border-[#ff4136] disabled:no-underline",
+        className
       )}
       {...props}>
       {children}

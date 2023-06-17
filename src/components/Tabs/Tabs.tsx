@@ -14,7 +14,6 @@ const TabsCustom:React.FC<ITabsProps> = ({ defaultTab, selectedTabValue, setSele
     <Tabs.List 
     className="flex justify-start height-[50px] p-[6px] w-[fit-content] shrink-0 focus:ring-violet-300 "
     >
-
     {tabsData && tabsData.map((tab, index) => (
           <Tabs.Trigger
             key={index}
