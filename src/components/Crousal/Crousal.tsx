@@ -44,9 +44,11 @@ const Crousal: React.FC<ICrousalProps> = ({ variant, productData, homeData, slid
   return (
     <Slider {...settings} ref={slider}>
 
-      {productData && productData.map((data, ind) => (
-        <Card key={ind} data={data} />
-      ))}
+			{productData && productData.map((data, ind) => (
+				<div className="pr-5">
+					<Card key={ind} data={data} />
+				</div>
+			))}
 
       {homeData && homeData.map((data, ind) => (
         <HomeCrousal key={ind} data={data} />
