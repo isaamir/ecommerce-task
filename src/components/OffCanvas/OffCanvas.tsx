@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -18,7 +18,23 @@ const OffCanvas: React.FC<IOffCanvasProps> = ({
   setOpenOffCanvas,
   children,
 }) => {
-  const { productList } = useProductListState();
+  const { productList, setProductList } = useProductListState();
+  const [ totalPrice, setTotalPrice] = useState(0)
+
+  const removeFromCart = (prodId:number) => {
+    const updatedProducts = productList.filter(prod => prod.id !== prodId);
+    setProductList(updatedProducts);
+  }
+
+  useEffect(() => {
+    let total = 0
+    productList.map((prod:any) => {
+      total += (prod.price * prod.quantity)
+    })
+    setTotalPrice(total)
+  }, [totalPrice, productList])
+
+  
 
 
   return (
@@ -82,11 +98,29 @@ const OffCanvas: React.FC<IOffCanvasProps> = ({
                               </div>
                             </div>
 
-                            <Button variant="icon">
+                            <Button variant="icon" onClick={() => removeFromCart(prod.id)}>
                               <AiOutlineClose size="15" color="gray" />
                             </Button>
                           </div>
                         ))}
+
+                        {
+                          productList  && productList.length > 0 && (
+                            <div className="flex flex-col gap-[15px] my-[10px]">
+                                <div className="flex justify-between items-center">
+                                  <Text variant="dark" className="text-[20px]" >Total: </Text>
+                                  <Text variant="red" className="text-[16px]"> { totalPrice } </Text>
+                                </div>
+                                <Button className="normal-case">
+                                  View Cart
+                                </Button>
+                                <Button className="normal-case bg-[#424949] text-[#ffffff]">
+                                  Checkout
+                                </Button>
+
+                            </div>
+                          )
+                        }
 
                         {
                            productList.length === 0 && (

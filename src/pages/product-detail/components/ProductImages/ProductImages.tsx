@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Text from "@/components/Text";
 import { BsStar } from "react-icons/bs";
 import { BsSuitHeart } from "react-icons/bs";
@@ -9,9 +9,23 @@ import { AiOutlineGooglePlus } from "react-icons/ai";
 import { RiTwitterFill } from "react-icons/ri";
 import { TiSocialInstagram } from "react-icons/ti";
 import ImageGallery from "react-image-gallery";
+import OffCanvas from "@/components/OffCanvas";
 import "react-image-gallery/styles/css/image-gallery.css";
+import { useProductListState, useSelectedProductState } from "@/state/cart/hooks";
 
 const ProductImages: React.FC = () => {
+  // right now the selected product is coming from redux, but in real scenario, we fetch the data from api
+  // from routeurl, we fetch id of product, and make an api call with that id.
+
+  const { selectedProduct, setSelectedProduct } = useSelectedProductState()
+
+  const { productList, setProductList } = useProductListState();
+  const [ itemQuantity, setItemQuantity ]  = useState(1)
+  const [openOffCanvas, setOpenOffCanvas ] = useState(false)
+
+
+  console.log('selected prod are', selectedProduct)
+
   const images = [
     {
       original: "/assets/images/product-one.png",
@@ -30,6 +44,39 @@ const ProductImages: React.FC = () => {
         thumbnail: "/assets/images/product-four.png",
       },
   ];
+
+
+  const addToCart = (data:any) => {
+    if (productList.length > 0) {
+      const existingItem = productList.find((prod) =>  data.id === prod.id)
+      if (existingItem) {
+        existingItem.quantity += itemQuantity;
+        console.log(...productList)
+        setProductList([...productList]);
+      } else {
+        setProductList([...productList, {
+                   id: data.id,
+                   image: data.image,
+                   name: data.name,
+                   price: data.price,
+                   quantity: itemQuantity,
+               }]);
+      }
+    } else {
+      setProductList([
+        ...productList,
+        {
+          id: data.id,
+          image: data.image,
+          name: data.name,
+          price: data.price,
+          quantity: itemQuantity,
+        },
+      ]);
+    }
+    setOpenOffCanvas(true)
+  };
+
   return (
     <>
       <div className="flex gap-x-[30px] my-[120px]">
@@ -51,7 +98,7 @@ const ProductImages: React.FC = () => {
         <div className="flex flex-col gap-y-[30px]">
           <div className="flex flex-col gap-y-[10px]">
             <Text variant="dark" className="text-[30px] text-[#444]">
-              Black Digital Watch
+              {selectedProduct.name}
             </Text>
             <div className="flex items-center gap-[10px]">
               <div className="flex gap-[10px] items-center">
@@ -66,27 +113,41 @@ const ProductImages: React.FC = () => {
           </div>
 
           <Text className="leading-[30px]">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution.
+           {selectedProduct.desc}
           </Text>
 
           <div className="flex flex-col justify-between h-full">
             <div>
               <Text variant="red" className="text-[30px] font-medium">
-                $ 7,903.00
+                $ {selectedProduct.price}
               </Text>
             </div>
             <div className="flex items-center gap-[15px]">
-              <Text className="text-[18px]">Quantity : </Text>
-              <Button variant="icon"> - </Button>
-              <Text> 1 </Text>
-              <Button variant="icon"> + </Button>
+
+              <Text className="text-[16px]">Quantity : </Text>
+                        <Button
+                          variant="icon"
+                          onClick={() => {
+                            if (itemQuantity === 1) {
+                              setItemQuantity(1);
+                            } else {
+                              setItemQuantity(itemQuantity - 1);
+                            }
+                          }}
+                        >
+                          -
+                        </Button>
+                        <Text> {itemQuantity} </Text>
+                        <Button
+                          variant="icon"
+                          onClick={() => setItemQuantity(itemQuantity + 1)}
+                        >
+                          +
+                        </Button>
             </div>
             <div className="flex flex-col gap-y-[30px] w-[max-content]">
               <div className="flex gap-x-[20px]">
-                <Button size="small">ADD TO CARD</Button>
+                <Button size="small" onClick={() => addToCart(selectedProduct)} >ADD TO CARD</Button>
                 <Button size="small" className="px-[9px]">
                   <BsSuitHeart size="15px" />
                 </Button>
@@ -153,6 +214,11 @@ const ProductImages: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <OffCanvas
+        openOffCanvas={openOffCanvas}
+        setOpenOffCanvas={setOpenOffCanvas}
+      />
     </>
   );
 };
