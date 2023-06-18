@@ -5,6 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { AiOutlineClose } from "react-icons/ai"
 import Button from '../Button'
 import Text from '../Text'
+import { useProductListState } from '@/state/cart/hooks'
 
 interface IOffCanvasProps {
    openOffCanvas: boolean
@@ -13,6 +14,11 @@ interface IOffCanvasProps {
 }
 
 const OffCanvas: React.FC<IOffCanvasProps> = ({ openOffCanvas, setOpenOffCanvas, children }) => {
+
+   const { productList, setProductList } = useProductListState()
+   setProductList([{id: 0, image: 'aa', name: 'as', price: 'ddd', quantity: 'dds'}])
+   console.log('product List', productList)
+
    return (
       <Transition.Root show={openOffCanvas} as={Fragment}>
          <Dialog as="div" className="relative z-10" onClose={setOpenOffCanvas}>
