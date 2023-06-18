@@ -3,7 +3,7 @@ import { CrousalVarients } from "@/utils/enums"
 type TProductDataType = {
     image: string
     name: string
-    price: string
+    price: number
   }
   type THomeDataType = {
     image: string

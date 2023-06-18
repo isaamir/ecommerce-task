@@ -40,11 +40,7 @@ const ProductImages: React.FC = () => {
     {
         original: "/assets/images/product-four.png",
         thumbnail: "/assets/images/product-four.png",
-    },
-    {
-      original: "/assets/images/product-five.png",
-      thumbnail: "/assets/images/product-five.png",
-    },
+    }
   ];
 
 
@@ -83,7 +79,7 @@ const ProductImages: React.FC = () => {
         <div className="flex-1">
           <ImageGallery
             items={images}
-            thumbnailPosition="bottom"
+            thumbnailPosition="left"
             showFullscreenButton={false}
             showPlayButton={false}
             showNav={false}

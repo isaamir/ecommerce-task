@@ -97,7 +97,7 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
             <div
               className={clsx(
                 "bg-cover bg-center bg-no-repeat min-w-[270px] w-[100%] h-[270px] relative ",
-                !animate && "h-[370px]"
+                !animate && "h-[370px] w-[370px]"
               )}
               style={{ backgroundImage: `url(${data.image})` }}
             >
