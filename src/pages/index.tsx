@@ -33,13 +33,13 @@ const Home = () => {
         />
 
         <div className=" flex justify-between">
-          <div className="absolute top-[30%] left-[50px]">
+          <div className="absolute top-[40%] left-[50px]">
             <Button variant="icon" onClick={() => slider?.current?.slickPrev()}>
               <IoIosArrowBack size="50" color="#797D7F" />
             </Button>
           </div>
 
-          <div className="absolute top-[30%] right-[50px]">
+          <div className="absolute top-[40%] right-[50px]">
             <Button variant="icon" onClick={() => slider?.current?.slickNext()}>
               <IoIosArrowForward size="50" color="#797D7F" />{" "}
             </Button>

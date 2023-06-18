@@ -16,9 +16,7 @@ import { useProductListState, useSelectedProductState } from "@/state/cart/hooks
 const ProductImages: React.FC = () => {
   // right now the selected product is coming from redux, but in real scenario, we fetch the data from api
   // from routeurl, we fetch id of product, and make an api call with that id.
-
   const { selectedProduct, setSelectedProduct } = useSelectedProductState()
-
   const { productList, setProductList } = useProductListState();
   const [ itemQuantity, setItemQuantity ]  = useState(1)
   const [openOffCanvas, setOpenOffCanvas ] = useState(false)
@@ -42,7 +40,11 @@ const ProductImages: React.FC = () => {
     {
         original: "/assets/images/product-four.png",
         thumbnail: "/assets/images/product-four.png",
-      },
+    },
+    {
+      original: "/assets/images/product-five.png",
+      thumbnail: "/assets/images/product-five.png",
+    },
   ];
 
 
@@ -50,9 +52,7 @@ const ProductImages: React.FC = () => {
     if (productList.length > 0) {
       const existingItem = productList.find((prod) =>  data.id === prod.id)
       if (existingItem) {
-        existingItem.quantity += itemQuantity;
-        console.log(...productList)
-        setProductList([...productList]);
+        setProductList([...productList, existingItem]);
       } else {
         setProductList([...productList, {
                    id: data.id,

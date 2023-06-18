@@ -19,11 +19,9 @@ const ProductViewModal: React.FC<IModalProps> = ({ open, setOpen, data }) => {
 
   const addToCart = (data: IProductType) => {
     if (productList.length > 0) {
-      const existingItem = productList.find((prod) =>  data.id === prod.id)
+      let existingItem = productList.find((prod) =>  data.id === prod.id)
       if (existingItem) {
-        existingItem.quantity += itemQuantity;
-        console.log(...productList)
-        setProductList([...productList]);
+        setProductList([...productList, existingItem]);
       } else {
         setProductList([...productList, {
                    id: data.id,
