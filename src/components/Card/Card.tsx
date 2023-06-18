@@ -105,7 +105,7 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
           <Link href={animate ? "/product-detail" : "#"}>
             <div
               className={clsx(
-                "bg-no-repeat bg-contain min-w-[270px] w-[100%] h-[270px] relative ",
+                "bg-cover bg-center bg-no-repeat min-w-[270px] w-[100%] h-[270px] relative ",
                 !animate && "h-[370px]"
               )}
               style={{ backgroundImage: `url(${data.image})` }}
@@ -127,13 +127,13 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
           </div>
 
           <div className="flex bg-[#D0D3D4] z-100 opacity-70 w-[max-content] hidden group-hover:block absolute top-[30%] right-[35%]">
-                <Button
-                  variant="icon"
-                  className="px-[12px] border-r-2 border-gray-500"
-                  onClick={() => setOpenPreview(true)}
-                >
-                  <AiOutlinePlus size="20" />
-                </Button>
+            <Button
+              variant="icon"
+              className="px-[12px] border-r-2 border-gray-500"
+              onClick={() => setOpenPreview(true)}
+            >
+              <AiOutlinePlus size="20" />
+            </Button>
 
                 <Button variant="icon" className="px-[12px]" onClick={() => addToCart(data)}>
                   <AiOutlineShoppingCart size="20" />

@@ -19,7 +19,7 @@ const TabsCustom:React.FC<ITabsProps> = ({ defaultTab, selectedTabValue, setSele
             key={index}
             value={tab.tabValue}
             className={clsx(
-              'px-8 pb-[17px] bg-transparent text-[20px] text-[#505050] ',
+              'sm:px-8 px-3 pb-[17px] bg-transparent sm:text-[20px] text-[15px] text-[#505050] ',
               variant === 'primary' && 'focus:border-b-2 focus:border-[#ff4136]',
               variant === 'secondary' && 'focus:text-[#ff4136] hover:text-[#ff4136]',
               variant === 'success' && 'bg-green-500 text-white',

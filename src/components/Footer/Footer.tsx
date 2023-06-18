@@ -12,8 +12,8 @@ import { TiSocialInstagram } from "react-icons/ti";
 const Footer = () => {
   return (
     <div className="bg-[url('/assets/images/background.png')] bg-no-repeat bg-cover" >
-      <div className="wrapper flex flex-col divide-y divide-dashed md:divide-solid md:max-xl:px-[50px]">
-        <div className="flex flex-row justify-between  pt-[76px] pb-[65px]">
+      <div className="wrapper flex flex-col divide-y divide-dashed md:divide-solid px-10">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10 py-[100px] max-md:py-[30px]">
           <div className="flex flex-col gap-[24px] max-w-[250px]">
             <Image
               src="/assets/images/logo.png"
@@ -73,7 +73,7 @@ const Footer = () => {
             <Link href="/">Uniqlo </Link>
             <p> All Right Reserved.</p>
           </div>
-          <div className="flex flex-row justify-between gap-x-[30px] text-[14px] text-[#666]">
+          <div className="flex flex-row justify-between gap-x-[30px] text-[14px] text-[#666] max-md:hidden">
             <Link href="/">My Account </Link>
             <Link href="/">Search </Link>
             <Link href="/">WishList </Link>
