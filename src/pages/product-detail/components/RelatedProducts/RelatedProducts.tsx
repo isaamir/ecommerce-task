@@ -15,7 +15,7 @@ const RelatedProducts: React.FC = () => {
           Related Product
       </Text>
       <div className="relative wrapper">
-      <Crousal variant={CrousalVarients.MULTIPLE} productData={produtList} slider={slider} />
+				<Crousal variant={CrousalVarients.MULTIPLE} productData={produtList} slider={slider} />
 
         <div className=" flex justify-between">
           <div className="absolute top-[40%] left-[-50px]">
