@@ -5,66 +5,34 @@ import { AiOutlineClose } from "react-icons/ai";
 import Text from "../Text";
 import Image from "next/image";
 import { useProductListState } from "@/state/cart/hooks";
+import { IProductType } from "@/utils/types";
 
-type TDataType = {
-  id: number;
-  image: string;
-  name: string;
-  price: string;
-  desc: string;
-};
 interface IModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  data: TDataType;
+  data: IProductType;
 }
 const ProductViewModal: React.FC<IModalProps> = ({ open, setOpen, data }) => {
   const { productList, setProductList } = useProductListState();
   const [itemQuantity, setItemQuantity] = useState(1);
   const cancelButtonRef = useRef(null);
 
-  console.log("lit data", productList);
-
-  const addToCart = (data: TDataType) => {
-    console.log("cart data", data);
-    console.log("lissst data", productList);
-
+  const addToCart = (data: IProductType) => {
     if (productList.length > 0) {
-      productList.map((prod, ind) => {
-        if (data.id === prod.id) {
-          setProductList([
-            ...productList,
-            {
-              id: data.id,
-              image: data.image,
-              name: data.name,
-              price: data.price,
-              quantity: itemQuantity,
-            },
-          ]);
-          // const existingProd = [
-          //   (productList[ind] = {
-          //     ...prod,
-          //     quantity: prod.quantity + itemQuantity,
-          //   }),
-          //   ...productList,
-          // ];
-          // setProductList(existingProd);
-          // return;
-        } else {
-          setProductList([
-            ...productList,
-            {
-              id: data.id,
-              image: data.image,
-              name: data.name,
-              price: data.price,
-              quantity: itemQuantity,
-            },
-          ]);
-          return;
-        }
-      });
+      const existingItem = productList.find((prod) =>  data.id === prod.id)
+      if (existingItem) {
+        existingItem.quantity += itemQuantity;
+        console.log(...productList)
+        setProductList([...productList]);
+      } else {
+        setProductList([...productList, {
+                   id: data.id,
+                   image: data.image,
+                   name: data.name,
+                   price: data.price,
+                   quantity: itemQuantity,
+               }]);
+      }
     } else {
       setProductList([
         ...productList,
@@ -77,6 +45,7 @@ const ProductViewModal: React.FC<IModalProps> = ({ open, setOpen, data }) => {
         },
       ]);
     }
+    setOpen(false)
   };
 
   return (
@@ -133,7 +102,7 @@ const ProductViewModal: React.FC<IModalProps> = ({ open, setOpen, data }) => {
                         {data.name}
                       </Text>
                       <Text variant="red" className="text-[20px] font-medium	">
-                        $ 5,412.74
+                        $ {data.price}
                       </Text>
                       <Text className="leading-[30px]">{data.desc}</Text>
                       <div className="flex items-center gap-[15px]">

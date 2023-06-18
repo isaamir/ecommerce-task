@@ -5,19 +5,21 @@ import Link from "next/link";
 import Text from "../Text";
 import { BsHeart } from "react-icons/bs";
 import { ICardProps } from "./types";
-import { TProductData } from "./types";
+import { IProductType } from "@/utils/types"
+
 import ProductViewModal from "../ProductViewModal";
 import clsx from "clsx";
 import Button from "../Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useAnimation, motion, useInView } from "framer-motion";
-import { useProductListState } from "@/state/cart/hooks";
+import { useProductListState, useSelectedProductState } from "@/state/cart/hooks";
 import OffCanvas from "../OffCanvas";
 
 const Card: React.FC<ICardProps> = ({ data, animate }) => {
   const [openPreview, setOpenPreview] = useState(false);
   const { productList, setProductList } = useProductListState()
+  const { selectedProduct, setSelectedProduct } = useSelectedProductState()
   const [openOffCanvas, setOpenOffCanvas] = useState(false);
 
   const squareVariants = {
@@ -34,48 +36,23 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
     } else controls.start("hidden");
   }, [controls, isInView]);
 
-  const addToCart = (data: TProductData) => {
-    console.log("cart data", data);
-    console.log("lissst data", productList);
+  const addToCart = (data: IProductType) => {
 
     if (productList.length > 0) {
-      productList.map((prod, ind) => {
-        if (data.id === prod.id) {
-          setProductList([
-            ...productList,
-            {
-              id: data.id,
-              image: data.image,
-              name: data.name,
-              price: data.price,
-              quantity: 1,
-            },
-          ]);
-          // TODO
-          // const existingProd = [
-          //   ...productList,
-          //   (productList[ind] = {
-          //     ...prod,
-          //     quantity: prod.quantity + 1,
-          //   }),
-            
-          // ];
-          // setProductList(existingProd);
-          // return;
-        } else {
-          setProductList([
-            ...productList,
-            {
-              id: data.id,
-              image: data.image,
-              name: data.name,
-              price: data.price,
-              quantity: 1,
-            },
-          ]);
-          return;
-        }
-      });
+      const existingItem = productList.find((prod, ind) =>  data.id === prod.id)
+      if (existingItem) {
+        existingItem.quantity += 1;
+        console.log(...productList)
+        setProductList([...productList]);
+      } else {
+        setProductList([...productList, {
+                   id: data.id,
+                   image: data.image,
+                   name: data.name,
+                   price: data.price,
+                   quantity: 1,
+               }]);
+      }
     } else {
       setProductList([
         ...productList,
@@ -88,9 +65,13 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
         },
       ]);
     }
-
     setOpenOffCanvas(true)
   };
+
+  const selectedProductHandler = (data:any) => {
+    console.log('data os ', data)
+    setSelectedProduct({id: data.id, image: data.image, name: data.name, desc: data.desc, price: data.price})
+  }
 
 
   return (
@@ -101,7 +82,7 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
         initial="hidden"
         variants={squareVariants}
       >
-        <div className="flex flex-col relative group">
+        <div className="flex flex-col relative group" onClick={() => selectedProductHandler(data)}>
           <Link href={animate ? "/product-detail" : "#"}>
             <div
               className={clsx(

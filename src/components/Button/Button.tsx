@@ -2,12 +2,12 @@
 import { type ButtonHTMLAttributes, type ReactNode } from "react"
 import clsx from "clsx"
 
-type buttonVariant = "regular" | "red" | "link" | "icon" | "iconSlider" | "light"
-type buttonSize = "regular" | "large" | "small"
+type TButtonVariant = "regular" | "red" | "link" | "icon" | "iconSlider" | "light"
+type TButtonSize = "regular" | "large" | "small"
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: buttonSize
-  variant?: buttonVariant
+  size?: TButtonSize
+  variant?: TButtonVariant
   children: ReactNode
   className?: string
 }
