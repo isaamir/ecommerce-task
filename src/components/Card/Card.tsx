@@ -5,15 +5,20 @@ import Link from "next/link";
 import Text from "../Text";
 import { BsHeart } from "react-icons/bs";
 import { ICardProps } from "./types";
+import { TProductData } from "./types";
 import ProductViewModal from "../ProductViewModal";
 import clsx from "clsx";
 import Button from "../Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useAnimation, motion, useInView } from "framer-motion";
+import { useProductListState } from "@/state/cart/hooks";
+import OffCanvas from "../OffCanvas";
 
 const Card: React.FC<ICardProps> = ({ data, animate }) => {
   const [openPreview, setOpenPreview] = useState(false);
+  const { productList, setProductList } = useProductListState()
+  const [openOffCanvas, setOpenOffCanvas] = useState(false);
 
   const squareVariants = {
     visible: { scale: 1, transition: { scale: 1, duration: 1 } },
@@ -28,6 +33,65 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
       controls.start("visible");
     } else controls.start("hidden");
   }, [controls, isInView]);
+
+  const addToCart = (data: TProductData) => {
+    console.log("cart data", data);
+    console.log("lissst data", productList);
+
+    if (productList.length > 0) {
+      productList.map((prod, ind) => {
+        if (data.id === prod.id) {
+          setProductList([
+            ...productList,
+            {
+              id: data.id,
+              image: data.image,
+              name: data.name,
+              price: data.price,
+              quantity: 1,
+            },
+          ]);
+          // TODO
+          // const existingProd = [
+          //   ...productList,
+          //   (productList[ind] = {
+          //     ...prod,
+          //     quantity: prod.quantity + 1,
+          //   }),
+            
+          // ];
+          // setProductList(existingProd);
+          // return;
+        } else {
+          setProductList([
+            ...productList,
+            {
+              id: data.id,
+              image: data.image,
+              name: data.name,
+              price: data.price,
+              quantity: 1,
+            },
+          ]);
+          return;
+        }
+      });
+    } else {
+      setProductList([
+        ...productList,
+        {
+          id: data.id,
+          image: data.image,
+          name: data.name,
+          price: data.price,
+          quantity: 1,
+        },
+      ]);
+    }
+
+    setOpenOffCanvas(true)
+  };
+
 
   return (
     <>
@@ -71,14 +135,18 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
               <AiOutlinePlus size="20" />
             </Button>
 
-            <Button variant="icon" className="px-[12px]">
-              <AiOutlineShoppingCart size="20" />
-            </Button>
-          </div>
+                <Button variant="icon" className="px-[12px]" onClick={() => addToCart(data)}>
+                  <AiOutlineShoppingCart size="20" />
+                </Button>
+              </div>
         </div>
       </motion.div>
 
-      <ProductViewModal open={openPreview} setOpen={setOpenPreview} />
+      <ProductViewModal open={openPreview} setOpen={setOpenPreview} data={data} />
+      <OffCanvas
+        openOffCanvas={openOffCanvas}
+        setOpenOffCanvas={setOpenOffCanvas}
+      />
     </>
   );
 };
