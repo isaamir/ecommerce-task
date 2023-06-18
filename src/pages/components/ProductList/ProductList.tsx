@@ -9,8 +9,8 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <div className="flex justify-center flex-col mb-[80px]">
-        <div className=" flex justify-center my-[20px]">
+      <div className="flex justify-center flex-col mb-20 px-3">
+        <div className="flex justify-center my-4">
           <Tabs
             selectedTabValue={selectedTabValue}
             setSelectedTabValue={setSelectedTabValue}
@@ -24,7 +24,7 @@ const ProductList: React.FC = () => {
             ]}
           />
         </div>
-        <div className="flex justify-between flex-wrap gap-y-[60px]">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
           {selectedTabValue === TabValues.ZERO && (
             <>
               {produtList &&
