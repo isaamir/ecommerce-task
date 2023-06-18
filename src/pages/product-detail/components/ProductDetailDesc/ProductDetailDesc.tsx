@@ -28,9 +28,9 @@ const ProductDetailDesc = () => {
     },
   ];
   return (
-    <div>
+    <div className="px-5">
       <div className="flex justify-center flex-col mb-[0px] divide-y divide-dashed md:divide-solid">
-        <div className=" flex justify-center my-[-6px]">
+        <div className=" flex justify-center my-[-6px] mt-10">
           <Tabs
             selectedTabValue={selectedTabValue}
             setSelectedTabValue={setSelectedTabValue}
