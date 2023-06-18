@@ -13,7 +13,7 @@ const RelatedProducts: React.FC = () => {
     <div className='flex flex-col gap-y-[50px] items-center my-[100px]'>
       <Text size="xl" variant="dark">
           Related Product
-      </Text>
+      </Text>/product-detail
       <div className="relative wrapper">
 				<Crousal variant={CrousalVarients.MULTIPLE} productData={produtList} slider={slider} />
 

@@ -9,7 +9,7 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <div className="flex justify-center flex-col mb-20 px-3">
+      <div className="flex justify-center flex-col mb-20 px-3 my-[80px]">
         <div className="flex justify-center my-4">
           <Tabs
             selectedTabValue={selectedTabValue}

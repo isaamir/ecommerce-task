@@ -113,7 +113,7 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
               {data.name}
             </Link>
             <Text size="lg" variant="red">
-              {data.price}
+              $ {data.price}
             </Text>
           </div>
 
