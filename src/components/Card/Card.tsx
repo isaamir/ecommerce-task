@@ -42,9 +42,7 @@ const Card: React.FC<ICardProps> = ({ data, animate }) => {
     if (productList.length > 0) {
       const existingItem = productList.find((prod, ind) => data.id === prod.id);
       if (existingItem) {
-        existingItem.quantity += 1;
-        console.log(...productList);
-        setProductList([...productList]);
+        setProductList([...productList, existingItem]);
       } else {
         setProductList([
           ...productList,
