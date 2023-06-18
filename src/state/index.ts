@@ -3,7 +3,6 @@ import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import cart from "./cart/reducers"
 const PERSISTED_KEYS: string[] = ['cart']
@@ -11,7 +10,7 @@ const PERSISTED_KEYS: string[] = ['cart']
 const persistConfig = {
   key: 'primary',
   whitelist: PERSISTED_KEYS,
-  storage: AsyncStorage,
+  storage: storage,
 }
 
 const persistedReducer = persistReducer(

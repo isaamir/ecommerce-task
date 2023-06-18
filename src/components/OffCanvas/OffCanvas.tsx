@@ -15,9 +15,9 @@ interface IOffCanvasProps {
 
 const OffCanvas: React.FC<IOffCanvasProps> = ({ openOffCanvas, setOpenOffCanvas, children }) => {
 
-   const { productList, setProductList } = useProductListState()
-   setProductList([{id: 0, image: 'aa', name: 'as', price: 'ddd', quantity: 'dds'}])
-   console.log('product List', productList)
+   // const { productList, setProductList } = useProductListState()
+   // setProductList([{id: 0, image: 'aa', name: 'as', price: 'ddd', quantity: 'dds'}])
+   // console.log('product List', productList)
 
    return (
       <Transition.Root show={openOffCanvas} as={Fragment}>
