@@ -3,7 +3,7 @@ export interface IProductListType {
     image: string,
     name: string,
     price: string,
-    quantity: string
+    quantity: number
 }
 
 export interface IProductListState {

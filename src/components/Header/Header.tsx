@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import OffCanvas from "../OffCanvas";
 import { Disclosure } from "@headlessui/react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -6,12 +6,14 @@ import { FiSearch } from "react-icons/fi";
 import { BsPerson } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useProductListState } from '@/state/cart/hooks'
 import Text from "../Text";
 
 import Link from "next/link";
 import Image from "next/image";
 
 const Header = () => {
+  const {productList} = useProductListState()
   const [openOffCanvas, setOpenOffCanvas] = useState(false);
   return (
     <>
@@ -76,18 +78,25 @@ const Header = () => {
                     </div>
 
                     <BsPerson color="#666" size="20px" cursor="pointer" />
-                    
-                    <AiOutlineShoppingCart
-                      color="#666"
-                      size="20px"
-                      cursor="pointer"
-                    />
+                    <div
+                      className="relative pointer"
+                      onClick={() => setOpenOffCanvas(true)}
+                    >
+                      <div className="absolute bg-[#ff4136] text-[#ffffff] w-[20px] h-[20px]  rounded-full top-[-12px] right-[-15px] flex justify-center items-center pointer">
+                        <Text className="text-[#ffffff] text-[11px]">{productList.length}</Text>
+                      </div>
+                      <AiOutlineShoppingCart
+                        color="#666"
+                        size="20px"
+                        cursor="pointer"
+                      />
+                    </div>
+
                     <div className="max-sm:hidden">
                       <RxHamburgerMenu
                         color="#666"
                         size="20px"
                         cursor="pointer"
-                        onClick={() => setOpenOffCanvas(true)}
                       />
                     </div>
                   </div>
@@ -98,8 +107,8 @@ const Header = () => {
             {/* this is for mobile screen */}
             <Disclosure.Panel className="sm:hidden  max-sm:bg-gray-800">
               <div className="space-y-1 px-2 pb-3 pt-2">
-                <Link href="/" >
-                  <Text  variant="underline">Home</Text>
+                <Link href="/">
+                  <Text variant="underline">Home</Text>
                 </Link>
                 <Link href="/">
                   <Text variant="underline">Shop</Text>
@@ -114,7 +123,9 @@ const Header = () => {
                   <Text variant="underline">About</Text>
                 </Link>
                 <Link href="/">
-                  <Text variant="white" size="lg" className="py-2">Contract</Text>
+                  <Text variant="white" size="lg" className="py-2">
+                    Contract
+                  </Text>
                 </Link>
               </div>
             </Disclosure.Panel>
