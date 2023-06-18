@@ -79,13 +79,11 @@ const ProductImages: React.FC = () => {
 
   return (
     <>
-      <div className="flex gap-x-[30px] my-[120px]">
-        <div
-          className="w-[150%] h-full"
-        >
+      <div className="flex max-md:flex-col gap-x-[30px] md:my-[120px] px-5">
+        <div className="flex-1">
           <ImageGallery
             items={images}
-            thumbnailPosition="left"
+            thumbnailPosition="bottom"
             showFullscreenButton={false}
             showPlayButton={false}
             showNav={false}
@@ -95,7 +93,7 @@ const ProductImages: React.FC = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-y-[30px]">
+        <div className="flex flex-col flex-1 gap-y-[30px] max-md:mt-10">
           <div className="flex flex-col gap-y-[10px]">
             <Text variant="dark" className="text-[30px] text-[#444]">
               {selectedProduct.name}
