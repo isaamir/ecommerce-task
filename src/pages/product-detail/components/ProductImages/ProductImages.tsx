@@ -153,7 +153,7 @@ const ProductImages: React.FC = () => {
                 </Button>
               </div>
               <div>
-                <Button className="bg-[#ff4136] text-[#ffffff] w-full border-[0px]" size="small">
+                <Button className="bg-[#ff4136] text-[#ffffff] w-full border-hidden" size="small">
                   Buy Now
                 </Button>
               </div>
