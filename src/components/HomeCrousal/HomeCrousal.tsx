@@ -13,8 +13,8 @@ const HomeCrousal: React.FC<IHomeCrousalProps> = ({ data }) => {
     >
       <div className='relative'>
         {data.image === imgOnePath && (
-          <div className='flex flex-col items-center absolute top-[230px] right-40' >
-            <Text className="md:text-[50px] text-[30px] text-[#000] font-bold">
+          <div className='flex flex-col items-center absolute top-[230px] right-[50%] translate-x-[50%] md:right-60 md:translate-x-0' >
+            <Text className="md:text-[50px] text-[30px] text-[#000] font-bold whitespace-nowrap">
               New Product <span className='text-[#ff4136]'>Collection</span>
             </Text>
             <Text variant="contrast" className="text-[#333333] cursor-pointer" > SHOP NOW - </Text>
@@ -22,8 +22,8 @@ const HomeCrousal: React.FC<IHomeCrousalProps> = ({ data }) => {
         )}
         {
           data.image === imgTwoPath && (
-            <div className='flex flex-col items-center w-[max-content] absolute top-[230px] left-40' >
-              <Text className="md:text-[50px] text-[30px] text-[#000] font-bold">
+            <div className='flex flex-col items-center w-[max-content] absolute top-[230px] left-[50%] translate-x-[-50%] md:left-60 md:translate-x-0' >
+              <Text className="md:text-[50px] text-[30px] text-[#000] font-bold whitespace-nowrap">
                 Featured <span className='text-[#ff4136]'>Collection</span>
               </Text>
               <Text variant="contrast" className="text-[#333333] cursor-pointer" > SHOP NOW - </Text>
