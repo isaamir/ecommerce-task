@@ -1,21 +1,92 @@
+import React, { Fragment, useRef, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import Button from "../Button";
+import { AiOutlineClose } from "react-icons/ai";
+import Text from "../Text";
+import Image from "next/image";
+import { useProductListState } from "@/state/cart/hooks";
 
-import React, { Fragment, useRef } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import Button from '../Button'
-import { AiOutlineClose } from "react-icons/ai"
-import Text from '../Text'
-import Image from 'next/image'
-
-interface IModalProps{
-  open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+type TDataType = {
+  id: number;
+  image: string;
+  name: string;
+  price: string;
+  desc: string;
+};
+interface IModalProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  data: TDataType;
 }
-const ProductViewModal:React.FC<IModalProps> = ({open , setOpen}) => {
+const ProductViewModal: React.FC<IModalProps> = ({ open, setOpen, data }) => {
+  const { productList, setProductList } = useProductListState();
+  const [itemQuantity, setItemQuantity] = useState(1);
+  const cancelButtonRef = useRef(null);
 
-  const cancelButtonRef = useRef(null)
+  console.log("lit data", productList);
+
+  const addToCart = (data: TDataType) => {
+    console.log("cart data", data);
+    console.log("lissst data", productList);
+
+    if (productList.length > 0) {
+      productList.map((prod, ind) => {
+        if (data.id === prod.id) {
+          setProductList([
+            ...productList,
+            {
+              id: data.id,
+              image: data.image,
+              name: data.name,
+              price: data.price,
+              quantity: itemQuantity,
+            },
+          ]);
+          // const existingProd = [
+          //   (productList[ind] = {
+          //     ...prod,
+          //     quantity: prod.quantity + itemQuantity,
+          //   }),
+          //   ...productList,
+          // ];
+          // setProductList(existingProd);
+          // return;
+        } else {
+          setProductList([
+            ...productList,
+            {
+              id: data.id,
+              image: data.image,
+              name: data.name,
+              price: data.price,
+              quantity: itemQuantity,
+            },
+          ]);
+          return;
+        }
+      });
+    } else {
+      setProductList([
+        ...productList,
+        {
+          id: data.id,
+          image: data.image,
+          name: data.name,
+          price: data.price,
+          quantity: itemQuantity,
+        },
+      ]);
+    }
+  };
+
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        initialFocus={cancelButtonRef}
+        onClose={setOpen}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -39,38 +110,63 @@ const ProductViewModal:React.FC<IModalProps> = ({open , setOpen}) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[50%] ">
-                <div className='flex flex-col justify-between divide-y divide-solid md:divide-solid'>
-                  <div className='flex justify-end p-[10px]'>
-                    <Button variant='icon' onClick={() => setOpen(false)}>
+                <div className="flex flex-col justify-between divide-y divide-solid md:divide-solid">
+                  <div className="flex justify-end p-[10px]">
+                    <Button variant="icon" onClick={() => setOpen(false)}>
                       <AiOutlineClose size="20" />
                     </Button>
                   </div>
 
-                  <div className='flex gap-x-[30px] p-[20px]'>
+                  <div className="flex gap-x-[30px] p-[20px]">
                     <div>
-                    <Image src="/assets/images/product-one.png" width="1500" height="100" alt="img" />
+                      <Image
+                        src={data.image}
+                        width="1500"
+                        height="100"
+                        alt="img"
+                      />
                     </div>
 
-                    <div className='flex flex-col gap-y-[20px]'>
-                        <Text variant="dark" className="text-[18px]" >
-                            Smart Head Cap
-                        </Text>
-                        <Text variant="red" className="text-[20px] font-medium	">$ 5,412.74</Text>
-                        <Text className="leading-[30px]">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia</Text>
-                        <div className="flex items-center gap-[15px]">
-                          <Text className="text-[16px]">Quantity : </Text>
-                          <Button variant="icon"> - </Button>
-                          <Text> 1 </Text>
-                          <Button variant="icon"> + </Button>
-                        </div>
-
-                        <Button size="small" className="bg-[#808B96] border-0	text-[#ffffff] text-[22px] w-[60%]">
-                          Add To Cart
+                    <div className="flex flex-col gap-y-[20px]">
+                      <Text variant="dark" className="text-[18px]">
+                        {data.name}
+                      </Text>
+                      <Text variant="red" className="text-[20px] font-medium	">
+                        $ 5,412.74
+                      </Text>
+                      <Text className="leading-[30px]">{data.desc}</Text>
+                      <div className="flex items-center gap-[15px]">
+                        <Text className="text-[16px]">Quantity : </Text>
+                        <Button
+                          variant="icon"
+                          onClick={() => {
+                            if (itemQuantity === 1) {
+                              setItemQuantity(1);
+                            } else {
+                              setItemQuantity(itemQuantity - 1);
+                            }
+                          }}
+                        >
+                          -
                         </Button>
-                    </div>
+                        <Text> {itemQuantity} </Text>
+                        <Button
+                          variant="icon"
+                          onClick={() => setItemQuantity(itemQuantity + 1)}
+                        >
+                          +
+                        </Button>
+                      </div>
 
+                      <Button
+                        size="small"
+                        className="bg-[#808B96] border-0	text-[#ffffff] text-[22px] w-[60%]"
+                        onClick={() => addToCart(data)}
+                      >
+                        Add To Cart
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Dialog.Panel>
@@ -79,6 +175,6 @@ const ProductViewModal:React.FC<IModalProps> = ({open , setOpen}) => {
         </div>
       </Dialog>
     </Transition.Root>
-  )
-}
-export default ProductViewModal
+  );
+};
+export default ProductViewModal;
